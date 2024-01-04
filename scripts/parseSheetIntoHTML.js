@@ -8,6 +8,8 @@ const TABLE_CAPTION = "This is an example table caption";
 const PATH_TO_INDEX = "./src/index.html";
 const PATH_TO_DIST_INDEX = "./index.html";
 
+const SHEET_POSITION = 0;
+
 const { SPREADSHEET_ID, SERVICE_EMAIL, PRIVATE_KEY } = process.env;
 
 console.log({ // this should show up all correctly blanked out
