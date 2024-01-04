@@ -1,4 +1,4 @@
-name: Update Dates at 10pm
+name: Build and push
 on:
   schedule:
     - cron: "0 2,12,22 * * *"
