@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "node scripts/parseSheetIntoHTML.js",
     "build": "npm run build:js",
-    "build:js": "esbuild src/index.js --target=es2019 --bundle  --minify --sourcemaps=false --outfile=./index.js",
+    "build:js": "esbuild src/index.js --target=es2019 --bundle  --minify --outfile=./index.js",
     "serve": "http-server -p 4321",
     "develop": "npm run build && concurrently -k \"npm:watch:js\" \"npm:serve\"",
     "start": "npm run build && npm run serve",
