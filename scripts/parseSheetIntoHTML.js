@@ -10,6 +10,10 @@ const PATH_TO_DIST_INDEX = "./index.html";
 
 const { SPREADSHEET_ID, SERVICE_EMAIL, PRIVATE_KEY } = process.env;
 
+console.log({ // this should show up all correctly blanked out
+  SPREADSHEET_ID:Boolean(SPREADSHEET_ID), SERVICE_EMAIL:Boolean(SERVICE_EMAIL), PRIVATE_KEY:Boolean(PRIVATE_KEY)
+});
+
 const out = console.log.bind(console, "[Parse Sheet into HTML]");
 
 (async function parseSheetIntoHTML() {
