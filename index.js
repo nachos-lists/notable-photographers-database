@@ -1,22 +1,243 @@
-(()=>{var w=(e,t,r)=>{if(!t.has(e))throw TypeError("Cannot "+r)};var d=(e,t,r)=>(w(e,t,"read from private field"),r?r.call(e):t.get(e)),f=(e,t,r)=>{if(t.has(e))throw TypeError("Cannot add the same private member more than once");t instanceof WeakSet?t.add(e):t.set(e,r)},O=(e,t,r,n)=>(w(e,t,"write to private field"),n?n.call(e,r):t.set(e,r),r);function l(e,t,r){let n=e["querySelector"+(r?"All":"")](t);return r?[...n||[]]:n}function p(e,t){return!!e.querySelector(t)}function g(e){let t=l.bind(l,e),r=p.bind(p,e),n=[],o=[],a="th",i=r(a);return i||(a="tr:first-child td"),n.push(...t(a,!0).map(s=>String(s.innerText).trim())),i&&t("tr",!0).filter(s=>p(s,"td")&&!s.closest("tfoot")).forEach(s=>{let h={};n.forEach((b,S)=>{let A=s.children[S];A&&(h[b]=A.innerText)}),o.push(h)}),{headers:n,data:o}}function c(e){let t=document.createElement("template");return t.innerHTML=e,t.content.firstElementChild}var{isArray:y}=Array,{entries:P}=Object,u,E,R,D,_,m=class{constructor(t){f(this,u,void 0);f(this,E,c(`
-          <figure class="better-table better-table--wrapper" data-is-better-table>
-            <section hidden data-hidden aria-hidden="true" class="better-table better-table--prior-table">
-            </section>
-            <section class="better-table better-table--target">
-                <table class="better-table better-table-instance">
-                    <caption><tr><td>I will have some amazing shit here at some point</td></tr></caption>
-                    <thead><tr><td>I will have some amazing shit here at some point</td></tr></thead>
-                    <tbody><tr><td>I will have some amazing shit here at some point</td></tr></tbody>
-                    <tfoot><tr><td>I will have some amazing shit here at some point</td></tr></tfoot>
-                </table>
-            </section>
-        </figure>`));f(this,R,[]);f(this,D,!0);f(this,_,["handleRowsChanged","handleHeadersChanged"]);O(this,u,t)}get events(){return{BEFORE_RENDER:"better-table:before-render",RENDER:"better-table:render",AFTER_RENDER:"better-table:after-render",BEFORE_RENDER_HEADERS:"better-table:before-render-headers",RENDER_HEADERS:"better-table:render-headers",AFTER_RENDER_HEADERS:"better-table:after-render-headers",BEFORE_RENDER_DATA:"better-table:before-render-data",RENDER_DATA:"better-table:render-data",AFTER_RENDER_DATA:"better-table:after-render-data",BEFORE_ROWS_CHANGED:"better-table:before-rows-changed",ROWS_CHANGED:"better-table:rows-changed",AFTER_ROWS_CHANGED:"better-table:after-rows-changed"}}set plugins(t){if(!y(t))throw new Error("Plugins array musts be an array of plugins");O(this,R,t)}get current(){return d(this,E).cloneNode(!0)}addEventListener(t,r){d(this,E).addEventListener(t,r)}dispatchEvent(t){d(this,E).dispatchEvent(t)}render(){d(this,D)&&this.initialize(),this.updateMarkup()}updateMarkup(){let{headers:t,data:r}=this.toJSON();this.dispatchEvent(new CustomEvent(this.events.BEFORE_RENDER,{detail:{table:this}})),this.dispatchEvent(new CustomEvent(this.events.BEFORE_RENDER_HEADERS,{detail:{table:this,headers:t}})),this.renderHeaders(t),this.dispatchEvent(new CustomEvent(this.events.AFTER_RENDER_HEADERS,{detail:{table:this}})),this.dispatchEvent(new CustomEvent(this.events.BEFORE_RENDER_DATA,{detail:{table:this,headers:t,data:r}})),this.renderData({headers:t,data:r}),this.dispatchEvent(new CustomEvent(this.events.AFTER_RENDER_DATA,{detail:{table:this,headers:t,data:r}})),l(d(this,E),".better-table--prior-table").append(d(this,u).cloneNode(!0)),d(this,u).replaceWith(d(this,E)),this.dispatchEvent(new CustomEvent(this.events.AFTER_RENDER,{detail:{table:this}}))}renderHeaders(t){console.log("at #renderHeaders",{headers:t});let r=l(d(this,E),".better-table-instance");l(r,"thead",!0).forEach(a=>a.remove());let n=c("<thead><tr></tr></thead>"),o=document.createDocumentFragment();for(let a of t)a&&(a instanceof HTMLTableCellElement&&o.append(a),a instanceof Function?o.append(c(a(this,t))):a.constructor===String&&o.append(c(`<th>${a}</th>`)));l(n,"tr").append(o),r.insertAdjacentElement("afterbegin",n)}renderData({headers:t,data:r}){console.log("at #renderData",{headers:t,data:r});let n=l(d(this,E),".better-table-instance");l(n,"tbody",!0).forEach(i=>i.remove());let o=c("<tbody></tbody>"),a=document.createDocumentFragment();for(let i of r){if(!i)continue;let s=c("<tr></tr>"),h=document.createDocumentFragment();if(i.constructor===Object)for(let b in i)h.append(c(`<td>${i[b]}</td>`));s.append(h),a.append(s)}o.append(a),n.insertAdjacentElement("afterbegin",o)}initialize(){d(this,R).forEach(t=>t(this));for(let t of d(this,_))this[t]=this[t].bind(this);this.addEventListener(this.events.ROWS_CHANGED,this.handleRowsChanged),this.addEventListener(this.events.HEADERS_CHANGED,this.handleHeadersChanged),O(this,D,!1)}handleRowsChanged({detail:t}){console.log(rows)}toJSON(t=d(this,u)){return g(t)}};u=new WeakMap,E=new WeakMap,R=new WeakMap,D=new WeakMap,_=new WeakMap;var H={find:l,htmlFromString:c};function N(e){console.log("at #filterable",{events:e.events}),e.addEventListener(e.events.AFTER_RENDER_DATA,({detail:t})=>{let r=[...t.data];t.data.length=0,t.data.push(...r)})}var L={UNSORTED:"&#8597;",ASC:"&#8593;",DESC:"&#8595;"},v=["UNSORTED","ASC","DESC"],x={SORT_UPDATED:"better-table-sortable:sort-updated"};function T(e){e.addEventListener(e.events.BEFORE_RENDER_HEADERS,({detail:t})=>{let{headers:r}=t,n=F.bind(F,e),o=B.bind(B,e),a=r.map((i,s)=>c(`
-            <th>
-                <div class="better-table-sortable better-table-sortable--header">
-                    <div class="better-table-sortable better-table-sortable--header--label">${i}</div>
-                    <div class="better-table-sortable better-table-sortable--header--actions">
-                      <button class="better-table-sortable--header--actions better-table-sortable--header--actions--sort" data-col="${s}" data-order="${v[0]}">${L.UNSORTED}</button>
-                    </div>
-                </div>
-            </th>
-        `));a.forEach(i=>{let s=l(i,".better-table-sortable--header--actions--sort");s.addEventListener("click",n),s.addEventListener(x.SORT_UPDATED,o)}),r.length=0,r.push(...a)})}function F(e,{target:t}){let{order:r}=t.dataset,{col:n}=t.dataset;r=v[(v.indexOf(r)+1)%v.length];let o=e.toJSON(),a=o.data.sort((i,s)=>{let[h,b]=[i,s].map(A=>String(A[o.headers[Number(n)]]).trim());if(!h)return 1;if(!b)return-1;let S=h>b?1:h===b?0:-1;return r===v[2]&&(S=h<b?1:h===b?0:-1),S});e.dispatchEvent(new CustomEvent(e.events.ROWS_CHANGED,{detail:{sorted:a,col:n}})),t.dispatchEvent(new CustomEvent(x.SORT_UPDATED,{detail:{order:r}}))}function B(e,{target:t,detail:r}){let{order:n}=r;t.innerHTML=L[n],t.dataset.order=n}function C(e){}document.addEventListener("DOMContentLoaded",()=>{H.find(document,"table",!0).forEach(e=>{let t=new m(e);t.plugins=[N,T,C],t.render()})});})();
+(() => {
+  // src/betterTables/util/index.js
+  var [$, $$] = [
+    (sel, parent = document) => parent.querySelector(sel),
+    (sel, parent = document) => [...parent.querySelectorAll(sel) || []]
+  ];
+  var $clone = (els) => {
+    return els instanceof Array ? els.map((el2) => el2.cloneNode(true)) : el.cloneNode(true);
+  };
+  var $html = (str) => {
+    const tpl = document.createElement("template");
+    tpl.innerHTML = str;
+    return tpl.content.firstElementChild;
+  };
+
+  // src/betterTables/util/meta.js
+  var { assign } = Object;
+  var META = /* @__PURE__ */ new WeakMap();
+  function getNodeMeta(node, key) {
+    if (META.has(node)) {
+      return META.get(node)[key];
+    }
+  }
+  function setNodeMeta(node, key, value) {
+    let prevData = {};
+    if (META.has(node)) {
+      prevData = META.get(node);
+    }
+    META.set(node, {
+      ...prevData,
+      [key]: value
+    });
+  }
+
+  // src/betterTables/constants/UI_ELS.js
+  var UI_ELS = {
+    BUTTON_SORT_ASC: $html(`<button data-sorting-order="asc">\u2193</button>`),
+    BUTTON_SORT_DESC: $html(`<button data-sorting-order="desc">\u2191</button>`),
+    BUTTON_SORT_UNSORTED: $html(`<button data-sorting-order="none">\u2195</button>`),
+    SORTABLE_HEADER: $html(`<div class="sortable-header">
+    <div class="sortable-header sortable-header-text"></div>
+    <div class="sortable-header sortable-header-actions"></div>
+  </div>`),
+    SEARCH_FORM: $html(`
+  <form>
+  <fieldset><legend>Search</legend>
+    <input type="search" />
+    <button type="submit">Search</button>
+  </fieldset>
+  <fielset hidden>
+    <datalist></datalist>
+  </fieldset>
+  </form>`)
+  };
+  var UI_ELS_default = UI_ELS;
+
+  // src/betterTables/constants/UI_STATES.js
+  var UI_STATES = {
+    SORTING_ORDER: {
+      nodes: ["BUTTON_SORT_UNSORTED", "BUTTON_SORT_ASC", "BUTTON_SORT_DESC"],
+      propValues: ["none", "asc", "desc"]
+    }
+  };
+  var UI_STATES_default = UI_STATES;
+
+  // src/betterTables/constants/EVENTS.js
+  var EVENTS = {
+    SORT_CHANGED: "sortable::sortChanged",
+    FILTER_CHANGED: "filterable::filterChanged"
+  };
+  var EVENTS_default = EVENTS;
+
+  // src/betterTables/constants/COMPARATORS.js
+  function compareAsc(AValue, BValue) {
+    const [comparableA, comparableB] = [
+      AValue.replace(/([^A-Za-z0-9]{1,})/, "\xFF"),
+      BValue.replace(/([^A-Za-z0-9]{1,})/, "\xFF")
+    ];
+    if (!comparableA) {
+      console.log("no AValue");
+      return 1;
+    }
+    if (!comparableB) {
+      console.log("no BValue");
+      return -1;
+    }
+    return comparableA > comparableB ? 1 : comparableA === comparableB ? 0 : -1;
+  }
+  function compareDesc(AValue, BValue) {
+    const [comparableA, comparableB] = [
+      AValue.replace(/([^A-Za-z0-9]{1,})/, "\xFF"),
+      BValue.replace(/([^A-Za-z0-9]{1,})/, "\xFF")
+    ];
+    if (!comparableA) {
+      console.log("no AValue");
+      return 1;
+    }
+    if (!comparableB) {
+      console.log("no BValue");
+      return -1;
+    }
+    return comparableA > comparableB ? -1 : comparableA === comparableB ? 0 : 1;
+  }
+  function compareNone(AValue, BValue) {
+  }
+  var COMPARATORS = {
+    asc: compareAsc,
+    desc: compareDesc,
+    none: compareNone
+  };
+  var COMPARATORS_default = COMPARATORS;
+
+  // src/index.js
+  document.addEventListener("DOMContentLoaded", () => {
+    $$("table").forEach(enhanceTable);
+  });
+  function enhanceTable(table) {
+    setNodeMeta(
+      table,
+      "originalRows",
+      $$("tbody tr", table).map((tr) => tr.cloneNode(true))
+    );
+    setNodeMeta(table, "id", `table-${Math.random().toString(36).substring(7)}`);
+    addSortingFilteringEventListeners(table);
+    makeHeadersSortable(table);
+    makeFilters(table);
+  }
+  function addSortingFilteringEventListeners(table) {
+    const {
+      SORT_CHANGED,
+      FILTER_CHANGED
+    } = EVENTS_default;
+    table.addEventListener(SORT_CHANGED, updateSortButton);
+    table.addEventListener(SORT_CHANGED, sortRows);
+    table.addEventListener(FILTER_CHANGED, filterRows);
+  }
+  function updateSortButton(evt) {
+    const { header } = evt.detail;
+    const sortButton = $("button", header);
+    const { col, sortingOrder } = sortButton.dataset;
+    const { propValues, nodes } = UI_STATES_default.SORTING_ORDER;
+    const currentSortingPos = propValues.indexOf(sortingOrder);
+    const nextSortingPos = (currentSortingPos + 1) % propValues.length;
+    const newButton = UI_ELS_default[nodes[nextSortingPos]].cloneNode(true);
+    newButton.dataset.col = col;
+    newButton.addEventListener("click", () => {
+      header.closest("table").dispatchEvent(
+        new CustomEvent(EVENTS_default.SORT_CHANGED, {
+          detail: {
+            header
+          }
+        })
+      );
+    });
+    sortButton.replaceWith(newButton);
+  }
+  function sortRows(evt) {
+    const { header } = evt.detail;
+    const table = header.closest("table");
+    const sortButton = $("button", header);
+    const { col, sortingOrder } = sortButton.dataset;
+    const cellsMass = $("tbody", table);
+    const sortable = cellsMass.cloneNode(true);
+    const getValue = (col2) => (row) => row.children[col2].innerHTML;
+    const original = $clone(getNodeMeta(table, "originalRows"));
+    const sorted = original.sort((A, B) => {
+      const getNthCell = getValue(col);
+      const [AValue, BValue] = [A, B].map((n) => getNthCell(n));
+      const comparator = COMPARATORS_default[sortingOrder];
+      return comparator(AValue, BValue);
+    }).map((toClone) => toClone.cloneNode(true));
+    sortable.innerHTML = "";
+    sortable.append(...sortingOrder === "none" ? original : sorted);
+    cellsMass.replaceWith(sortable);
+  }
+  function filterRows(evt) {
+    const { target: table, detail } = evt;
+    const { filter } = detail;
+    const rows = getNodeMeta(table, "originalRows");
+    if (!filter) {
+      $("tbody", table).innerHTML = "";
+      $("tbody", table).append(...rows);
+    } else {
+      const filtered = rows.filter((row) => {
+        return [...row.children].some((td) => td.innerHTML.includes(filter));
+      });
+      $("tbody", table).innerHTML = "";
+      $("tbody", table).append(
+        ...filtered.length ? filtered : [$html(`<tr><td colspan="12">No results</td></tr>`)]
+      );
+    }
+  }
+  function makeHeadersSortable(table) {
+    const headers = $$("th", table);
+    headers.forEach(makeHeaderSortable);
+  }
+  function makeFilters(table) {
+    const tableForm = UI_ELS_default.SEARCH_FORM.cloneNode(true);
+    const uniques = {};
+    for (const td of $$("tbody td", table)) {
+      uniques[td.innerHTML] = true;
+    }
+    const uniqueValues = Object.keys(uniques).map(
+      (k) => $html(`<option value="${k}"></option>"`)
+    );
+    const values = $("datalist", tableForm);
+    const valuesID = getNodeMeta(table, "id");
+    values.setAttribute("id", valuesID);
+    $("input", tableForm).setAttribute("list", valuesID);
+    $("datalist", tableForm).append(...uniqueValues);
+    tableForm.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      table.dispatchEvent(
+        new CustomEvent(EVENTS_default.FILTER_CHANGED, {
+          detail: {
+            filter: $("input", tableForm).value
+          }
+        })
+      );
+    });
+    table.parentNode.insertBefore(tableForm, table);
+  }
+  function makeHeaderSortable(header, pos) {
+    const { SORTABLE_HEADER, BUTTON_SORT_UNSORTED } = UI_ELS_default;
+    const upgradedHeader = SORTABLE_HEADER.cloneNode(true);
+    const sortButton = BUTTON_SORT_UNSORTED.cloneNode(true);
+    sortButton.addEventListener("click", () => {
+      header.closest("table").dispatchEvent(
+        new CustomEvent(EVENTS_default.SORT_CHANGED, {
+          detail: {
+            header
+          }
+        })
+      );
+    });
+    sortButton.dataset.col = pos;
+    $(".sortable-header-text", upgradedHeader).innerText = header.innerText;
+    $(".sortable-header-actions", upgradedHeader).append(sortButton);
+    header.innerHTML = "";
+    header.append(upgradedHeader);
+  }
+})();

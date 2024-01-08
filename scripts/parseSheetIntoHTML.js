@@ -3,6 +3,9 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import { promises } from "fs";
 import { resolve } from "path";
 import { parseHTML } from "linkedom";
+import { configure } from "dotenv";
+
+configure()
 
 const TABLE_CAPTION = "This is an example table caption";
 const PATH_TO_INDEX = "./src/index.html";
