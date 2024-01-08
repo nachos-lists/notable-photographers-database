@@ -1,0 +1,8 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+
+  &.stack-horz {
+    flex-direction: row;
+  }
+}

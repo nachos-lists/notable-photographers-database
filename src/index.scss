@@ -1,0 +1,121 @@
+@use "./styles/modules/fonts";
+@use "./styles/modules/reset";
+@use "./styles/modules/stack";
+@use "./styles/modules/filtersList";
+
+.sortable-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+form {
+  fieldset {
+    margin: 0;
+    padding: 0;
+    margin-top: 1rem;
+    border: none;
+    outline: none;
+    background: #efefef;
+    fieldset,
+    legend {
+      margin: 0;
+      padding: 0;
+    }
+    legend {
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  tfoot,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+    margin-top: 1rem;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    height: 3rem;
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  /*
+	Label the data
+	*/
+  /**
+  Name
+Areas
+Tech
+Country
+Alive
+Link
+Comment
+  */
+  td:nth-of-type(1):before {
+    content: "Name";
+  }
+  td:nth-of-type(2):before {
+    content: "Areas";
+  }
+  td:nth-of-type(3):before {
+    content: "Tech";
+  }
+  td:nth-of-type(4):before {
+    content: "Country";
+  }
+  td:nth-of-type(5):before {
+    content: "Alive";
+  }
+  td:nth-of-type(6):before {
+    content: "Link";
+  }
+  td:nth-of-type(7):before {
+    content: "Comment";
+  }
+
+  tfoot {
+    td:nth-of-type(1):before {
+      content: "";
+    }
+
+    td:nth-of-type(2):before {
+      content: "";
+    }
+  }
+}

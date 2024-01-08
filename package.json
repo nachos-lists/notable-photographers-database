@@ -7,11 +7,11 @@
   "scripts": {
     "prebuild": "node scripts/parseSheetIntoHTML.js",
     "build": "npm run build:js",
-    "build:js": "esbuild src/index.js --target=es2019 --bundle  --minify --outfile=./index.js",
+    "build:js": "node scripts/build.js",
     "serve": "http-server -p 4321",
     "develop": "concurrently -k \"npm:watch:js\" \"npm:serve\"",
     "start": "npm run build && npm run serve",
-    "watch:js": "esbuild src/index.js --watch --target=es2019 --bundle --outfile=./index.js"
+    "watch:js": "node scripts/watch.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "concurrently": "^8.2.2",
     "dotenv": "^16.3.1",
     "esbuild": "^0.19.8",
+    "esbuild-sass-plugin": "^2.16.1",
     "google-auth-library": "^9.4.1",
     "google-spreadsheet": "^4.1.1",
     "http-server": "^14.1.1",
