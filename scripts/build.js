@@ -1,5 +1,5 @@
 
-const esbuild = require('esbuild');
+import esbuild from 'esbuild';
 const esbuildSassPlugin = require('esbuild-sass-plugin');  // Correct import
 
 esbuild.build({
