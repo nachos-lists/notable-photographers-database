@@ -1,0 +1,24 @@
+#applied-filters {
+  ol {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    & > li {
+      margin: 0.5rem;
+      list-style-type: none;
+      font-size: 0.75rem;
+      line-height: 2;
+      & > .stack {
+        background: #eaeaea;
+        padding: 0.25rem;
+        border: 1px solid #e2e2e2;
+      }
+      & > .stack .filters-column {
+        margin-left: 1rem;
+        &::after {
+          content: ": ";
+        }
+      }
+    }
+  }
+}

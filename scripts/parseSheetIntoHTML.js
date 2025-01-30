@@ -4,11 +4,33 @@ import { promises } from "fs";
 import { resolve } from "path";
 import { parseHTML } from "linkedom";
 
+//Import viejo by Charly que aparentemente rompe
+//import { configure } from "dotenv";
+
+//Import Nacho sugerido por san ChatGPT, no anduvo
+//const dotenv = require("dotenv");
+//dotenv.config();
+
+import dotenv from "dotenv";
+dotenv.config();
+console.log(process.env.SPREADSHEET_ID);  // Log the value to check if it loads correctly
+
+
+//Comento esto también
+//configure()
+
+
 const TABLE_CAPTION = "This is an example table caption";
 const PATH_TO_INDEX = "./src/index.html";
 const PATH_TO_DIST_INDEX = "./index.html";
 
+const SHEET_POSITION = 0;
+
 const { SPREADSHEET_ID, SERVICE_EMAIL, PRIVATE_KEY } = process.env;
+
+console.log({ // this should show up all correctly blanked out
+  SPREADSHEET_ID:Boolean(SPREADSHEET_ID), SERVICE_EMAIL:Boolean(SERVICE_EMAIL), PRIVATE_KEY:Boolean(PRIVATE_KEY)
+});
 
 const out = console.log.bind(console, "[Parse Sheet into HTML]");
 
