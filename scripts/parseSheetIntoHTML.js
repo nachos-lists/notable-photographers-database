@@ -3,9 +3,22 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import { promises } from "fs";
 import { resolve } from "path";
 import { parseHTML } from "linkedom";
-import { configure } from "dotenv";
 
-configure()
+//Import viejo by Charly que aparentemente rompe
+//import { configure } from "dotenv";
+
+//Import Nacho sugerido por san ChatGPT, no anduvo
+//const dotenv = require("dotenv");
+//dotenv.config();
+
+import dotenv from "dotenv";
+dotenv.config();
+console.log(process.env.SPREADSHEET_ID);  // Log the value to check if it loads correctly
+
+
+//Comento esto también
+//configure()
+
 
 const TABLE_CAPTION = "This is an example table caption";
 const PATH_TO_INDEX = "./src/index.html";
