@@ -13,6 +13,11 @@ permissions: write-all
 jobs:
   update-table:
     runs-on: ubuntu-latest
+    env: # Or as an environment variable
+      PRIVATE_KEY: ${{ secrets.PHDB_PK }}
+      SERVICE_EMAIL: ${{ secrets.PHDB_SERVICE_EMAIL }}
+      SPREADSHEET_ID: ${{ secrets.PHDB_SPREADSHEET }}
+
     steps:
       - name: Update Dates
         uses: actions/setup-node@v3
